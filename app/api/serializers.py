@@ -4,29 +4,37 @@ from app.models import University, Student, Course, Professor
 
 
 class UniversitySerializer(serializers.ModelSerializer):
+    pk = serializers.CharField(read_only=True)
+
     class Meta:
         model = University
-        fields = ('name',)
+        fields = ('pk', 'name',)
 
 
 class StudentSerializer(serializers.ModelSerializer):
+    pk = serializers.CharField(read_only=True)
+
     class Meta:
         model = Student
-        fields = ('first_name', 'last_name',
+        fields = ('pk', 'first_name', 'last_name',
                   'dni', 'university',)
 
 
 class ProfessorSerializer(serializers.ModelSerializer):
+    pk = serializers.CharField(read_only=True)
+
     class Meta:
         model = Professor
-        fields = ('first_name', 'last_name',
+        fields = ('pk', 'first_name', 'last_name',
                   'dni', 'profession', 'university',)
 
 
 class CourseSerializer(serializers.ModelSerializer):
+    pk = serializers.CharField(read_only=True)
+
     class Meta:
         model = Course
-        fields = ('name', 'professor')
+        fields = ('pk', 'name', 'professor')
 
 
 class AssignCoursesSerializer(serializers.Serializer):
