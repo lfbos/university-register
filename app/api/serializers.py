@@ -14,3 +14,10 @@ class StudentSerializer(serializers.ModelSerializer):
         model = Student
         fields = ('first_name', 'last_name',
                   'dni', 'university',)
+
+
+class ProfessorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Student
+        fields = ('first_name', 'last_name',
+                  'dni', 'profession', 'university',)
