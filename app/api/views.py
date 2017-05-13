@@ -1,13 +1,14 @@
-from rest_framework import mixins
-from rest_framework.viewsets import GenericViewSet
+from rest_framework import viewsets
 
-from app.api.serializers import UniversitySerializer
-from app.models import University
+from app.api.serializers import UniversitySerializer, StudentSerializer
+from app.models import University, Student
 
 
-class UniversityViewSet(mixins.CreateModelMixin,
-                        mixins.ListModelMixin,
-                        mixins.RetrieveModelMixin,
-                        GenericViewSet):
+class UniversityViewSet(viewsets.ModelViewSet):
     serializer_class = UniversitySerializer
     queryset = University.objects.all()
+
+
+class StudentViewSet(viewsets.ModelViewSet):
+    serializer_class = StudentSerializer
+    queryset = Student.objects.all()
