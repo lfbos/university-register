@@ -16,6 +16,17 @@ class University(mixins.BaseMixin):
 
 class Student(mixins.Person):
     university = models.ForeignKey('University', related_name='students')
+    courses = models.ManyToManyField(
+        'Course',
+        blank=True,
+        related_name='students'
+    )
+
+    def __str__(self):
+        return "{} - {}".format(
+            self.get_full_name(),
+            self.university
+        )
 
     class Meta:
         verbose_name = 'student'
@@ -29,3 +40,18 @@ class Professor(mixins.Person):
     class Meta:
         verbose_name = 'professor'
         verbose_name_plural = 'professors'
+
+
+class Course(mixins.BaseMixin):
+    name = models.CharField(max_length=64, verbose_name='course')
+    professor = models.ForeignKey('Professor', related_name='courses')
+
+    def __str__(self):
+        return "{} - {}".format(
+            self.name,
+            self.professor.university
+        )
+
+    class Meta:
+        verbose_name = 'course'
+        verbose_name_plural = 'courses'
