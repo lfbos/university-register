@@ -1,24 +1,31 @@
 from django.db import models
 
+from app import mixins
 
-class University(models.Model):
+
+class University(mixins.BaseMixin):
     name = models.CharField(max_length=128, verbose_name='university')
 
     def __str__(self):
         return self.name
 
+    class Meta:
+        verbose_name = 'university'
+        verbose_name_plural = 'universities'
 
-class Student(models.Model):
-    first_name = models.CharField(max_length=64, verbose_name='first name')
-    last_name = models.CharField(max_length=64, verbose_name='last name')
-    dni = models.CharField(max_length=64, verbose_name='student ID')
+
+class Student(mixins.Person):
     university = models.ForeignKey('University', related_name='students')
 
-    def __str__(self):
-        return self.get_full_name()
+    class Meta:
+        verbose_name = 'student'
+        verbose_name_plural = 'students'
 
-    def get_full_name(self):
-        return "{} {}".format(
-            self.first_name,
-            self.last_name
-        )
+
+class Professor(mixins.Person):
+    profession = models.CharField(max_length=64, verbose_name='profession')
+    university = models.ForeignKey('University', related_name='professors')
+
+    class Meta:
+        verbose_name = 'professor'
+        verbose_name_plural = 'professors'
