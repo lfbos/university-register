@@ -1,3 +1,4 @@
 Django==1.11.1
+django-cors-headers==2.0.2
 djangorestframework==3.6.3
 gunicorn==19.7.1
