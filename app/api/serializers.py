@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from app.models import University, Student
+from app.models import University, Student, Course, Professor
 
 
 class UniversitySerializer(serializers.ModelSerializer):
@@ -18,6 +18,22 @@ class StudentSerializer(serializers.ModelSerializer):
 
 class ProfessorSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Student
+        model = Professor
         fields = ('first_name', 'last_name',
                   'dni', 'profession', 'university',)
+
+
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ('name', 'professor')
+
+
+class AssignCoursesSerializer(serializers.Serializer):
+    student = serializers.ChoiceField(
+        choices=Student.objects.all()
+    )
+    courses = serializers.MultipleChoiceField(
+        choices=Course.objects.all(),
+        allow_empty=False
+    )
