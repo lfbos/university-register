@@ -33,9 +33,14 @@ class Student(mixins.Person):
         verbose_name_plural = 'students'
 
 
-class Professor(mixins.Person):
+class Professor(mixins.BaseMixin):
+    user = models.OneToOneField('auth.User', related_name='professor')
     profession = models.CharField(max_length=64, verbose_name='profession')
     university = models.ForeignKey('University', related_name='professors')
+    dni = models.CharField(max_length=64, db_index=True, unique=True, verbose_name='professor ID')
+
+    def __str__(self):
+        return self.user.get_full_name()
 
     class Meta:
         verbose_name = 'professor'
