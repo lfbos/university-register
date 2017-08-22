@@ -6,8 +6,6 @@ Single API RESTful created with Django/Django Rest Framework to create/list:
 * Professors
 * Courses
 
-**[Demo](https://radiant-mesa-96048.herokuapp.com/)**
-
 ## Use
 
 The project use python 3
